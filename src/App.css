@@ -92,6 +92,14 @@ a:hover {
   border-radius: 5px;
 }
 
-.finePrintUnderForm:hover {
+.signUpFinePrintUnderForm:hover {
   color: #c76262e3;
+}
+
+.switchAccountFinePrint:hover {
+  color: #c76262e3;
+}
+
+.switchAccountFinePrint:hover {
+  color: #ffc069;
 }

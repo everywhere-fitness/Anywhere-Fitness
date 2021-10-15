@@ -12,6 +12,8 @@ const initialLogInFormValues = { username: "", password: "" };
 export default function Login() {
     const [loginFormValues, setLogInFormValues] = useState(initialLogInFormValues);
     const { isLoading, setIsLoading } = useContext(GlobalPropsContext);
+    const { user, setUser } = useContext(GlobalPropsContext);
+
     let history = useHistory();
 
     const onChange = (e) => {
@@ -44,7 +46,8 @@ export default function Login() {
     return (
         <div>
             <form onSubmit={loginSubmitHandler} className="form">
-                <h1>Let's Get Fit!</h1>
+                {user.instructor === true && <h1>What's Up Coach!</h1>}
+                {user.client === true && <h1>Let's Get Fit!</h1>}
                 <input
                     placeholder="username"
                     name="username"
@@ -67,7 +70,16 @@ export default function Login() {
                     LogIn
                 </button>
             </form>
-            <p onClick="{}" className="finePrintUnderForm" >Click Here To Login as Instructor</p>
+            <p onClick={() => { history.push('/signup') }}
+                className="signUpFinePrintUnderForm" >
+                <span style={user.client === true ? { display: 'inline' } : { display: 'none' }}> Brand New!  Sign Up for an account!</span>
+                <span style={user.client === true ? { display: 'none' } : { display: 'inline' }}> Want to Coach?...Sign Up to be an Instructor!</span>
+            </p>
+            <p onClick={() => { setUser({ client: !user.client, instructor: !user.instructor }) }}
+                className="switchAccountFinePrint" >
+                <span style={user.client === true ? { display: 'none' } : { display: 'inline' }}> Click here to Login as a Member</span>
+                <span style={user.instructor === false ? { display: "inline" } : { display: "none" }}> Click Here To Login as an Instructor</span>
+            </p>
         </div>
     )
 }
