@@ -34,6 +34,9 @@ export default function NavBar() {
 
                     {/* logout not shown when loggedin */}
                     {(isLoggedIn === true) && <li><Link to="/logout">Logout </Link> </li>}
+
+                    {/* logout not shown when loggedin */}
+                    {(isLoggedIn === false) && <li><Link to="/signup">Signup</Link> </li>}
                 </ul>
             </nav>
         </div>

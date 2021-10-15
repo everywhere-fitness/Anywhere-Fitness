@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from "react"
 import { Route, Switch } from "react-router-dom"
 import Login from './components/signupslogins/login';
-import LoginInstructor from './components/signupslogins/loginInstructor'
+import Signup from './components/signupslogins/signup'
 import HomeClient from './components/homeclient'
 import HomeInstructor from './components/homeinstructor'
 import NavBar from './components/Navbars/NavBar';
@@ -28,11 +28,9 @@ function App() {
           <NavBar />
 
           <Switch>
-            <Route exact path="/signup"><Login /></Route>
-            <Route path="/signupinstructor"> <LoginInstructor /></Route>
+            <Route exact path="/signup"><Signup /></Route>
 
             <Route exact path="/login"><Login /></Route>
-            <Route path="/logininstructor"> <LoginInstructor /></Route>
 
             <Route path="/classes"> <Classes /></Route>
             <Route path="/class/:id"> <Class /></Route>
