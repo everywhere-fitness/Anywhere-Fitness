@@ -8,18 +8,27 @@
 // - `intensity level`
 // - `class location`
 
-import react from "react";
+import { useContext } from "react";
 import "../../App.css"
 import Search from "./search"
+import Class from "./class";
+import { GlobalPropsContext } from "../GlobalPropsContext";
+import { Link } from "react-router-dom";
 
 
 export default function Classes() {
+    const { allClasses, isFetchingClasses } = useContext(GlobalPropsContext);
+
 
     return (
         <div>
             <Search />
-            <h1>Shows All Classes Available</h1>
-            <p>links to each one individually where client can sign up to take that class</p>
+            <div className="CardSection">
+                {isFetchingClasses ? "Loading Classes..." :
+                    allClasses.map((eachClass) => (
+                        <Class class={eachClass} key={eachClass.id} />
+                    ))}
+            </div>
         </div>
     )
 }

@@ -4,8 +4,8 @@ import "../../App.css"
 export default function Search() {
 
     return (
-        <div>
-            <input type='text' name="search" placeholder="Search Through Classes"></input>
+        <div className="searchClasses">
+            <input className="searchInput" type='text' name="search" placeholder="Search Through Classes"></input>
         </div>
     )
 }
