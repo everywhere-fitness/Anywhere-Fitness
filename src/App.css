@@ -83,12 +83,45 @@ a:hover {
   border: 0.5px solid rgb(34, 33, 33);
 }
 
+.searchInput {
+  max-width: 700px;
+  width: 75%;
+  height: 50px;
+  margin: 5px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid rgb(34, 33, 33);
+  -webkit-box-shadow: 0px 1px 5px #3d2121;
+  -moz-box-shadow: 0px 1px 5px #a39999;
+  box-shadow: 0px 1px 5px #afa5a5;
+}
+
 .form button {
   width: 405px;
   height: 45px;
   margin: 5px;
   font-size: 1.1rem;
   background-color: #ffc069;
+  border-radius: 5px;
+}
+
+.classButton {
+  width: 65%;
+  height: 45px;
+  margin: 5px;
+  font-size: 1.2rem;
+  background-color: #a45d5d;
+  color: #efefef;
+  border-radius: 5px;
+}
+
+.detailsButton {
+  width: 65%;
+  height: 45px;
+  margin: 5px;
+  font-size: 1.2rem;
+  color: #a45d5d;
+  background-color: #efefef;
   border-radius: 5px;
 }
 
@@ -102,4 +135,31 @@ a:hover {
 
 .switchAccountFinePrint:hover {
   color: #ffc069;
+}
+
+/* CLASSES DISPLAYED */
+.CardSection {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+}
+.classCard {
+  min-width: 350px;
+  max-width: 450px;
+  width: 35%;
+  height: 450px;
+  margin: 25px 15px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 0.5px solid rgb(34, 33, 33);
+  -webkit-box-shadow: 0px 1px 5px #3d2121;
+  -moz-box-shadow: 0px 1px 5px #8a8181;
+  box-shadow: 0px 1px 5px #8a8181;
+  background-color: #ffc169e5;
+}
+
+.searchClasses {
+  margin: 30px 5px 5px 5px;
 }
