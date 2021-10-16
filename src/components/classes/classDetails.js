@@ -5,10 +5,10 @@ import { GlobalPropsContext } from '../GlobalPropsContext';
 
 const ClassDetails = () => {
     //const [details, setDetails] = useState();
-    //const { allClasses } = useContext(GlobalPropsContext);
+    const { allClasses } = useContext(GlobalPropsContext);
 
-    let params = useParams();
-    console.log(params.classId);
+    const { id } = useParams();
+    console.log(id);
 
     //let id = allClasses.find(id => id === Number(classId));
 
@@ -29,9 +29,23 @@ const ClassDetails = () => {
 
     return (
         <div>
-            <h1>Shows Individual class for class with the id {params.classId}</h1>
+            <h1>Shows Individual class for class with the id {id}</h1>
         </div>
     )
 }
 
 export default ClassDetails;
+
+{/* <div className="classDetails">
+    <img src={img}></img>
+    <h1>{name}</h1>
+    <p>Instructor: {instructor}</p>
+    <p>Type: {type} </p>
+    <p> Date: {date}</p>
+    <p> Time: {time}</p>
+    <p> Duration: {date}</p>
+    <p>Intensity Level: {intensity}</p>
+    <p>Location: {location}</p>
+    <p>Details: {details}</p>
+    <p>Total Coming: {currentNumberOfParticipants} / {maxClassSize}</p>
+</div> */}

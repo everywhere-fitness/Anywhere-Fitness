@@ -7,7 +7,7 @@ export default function HomeInstructor() {
 
     return (
         <div>
-            <h1>Home of Instructor</h1>
+            <h1>Classes You're Teaching</h1>
             <InstructorsClasses />
         </div>
     )

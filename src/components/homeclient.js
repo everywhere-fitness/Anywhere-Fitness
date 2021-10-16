@@ -6,7 +6,7 @@ export default function HomeClient() {
 
     return (
         <div>
-            <h1>Home of Client</h1>
+            <h1>Your Classes</h1>
             <UsersClasses />
         </div>
     )

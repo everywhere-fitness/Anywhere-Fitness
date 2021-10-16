@@ -1,16 +1,12 @@
 // 7. Authenticated user can reserve a spot in a 
 //class with available seats open.
 
-//import react, { useState } from "react";
-//import { useHistory } from "react-router";
+import react from "react";
 import "../../App.css"
 import { Link } from "react-router-dom";
-import { useRouteMatch } from "react-router";
 
 
 export default function Class(props) {
-    //const history = useHistory();
-    let match = useRouteMatch();
 
     const classId = props.class.id;
 

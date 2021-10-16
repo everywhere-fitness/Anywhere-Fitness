@@ -20,67 +20,67 @@ import "../../App.css"
 export default function EditClass() {
 
 
-	const [classInfo, setClassInfo] = useState();
-	const params = useParams(); 
-	// use axios to get class info to display in form
-	useEffect(() => {
-		axios
-			.get(`/editClass/${params.id}`) 
-			.then((res) => {
-				setClassInfo(res.data);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, [params]);
+    const [classInfo, setClassInfo] = useState();
+    const params = useParams();
+    // use axios to get class info to display in form
+    useEffect(() => {
+        axios
+            .get(`/editClass/${params.id}`)
+            .then((res) => {
+                setClassInfo(res.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [params]);
 
-    const initialEditClassFormValues = {name: classInfo.name, type: classInfo.type, time: classInfo.time, duration: classInfo.duration, intensity: classInfo.intensity, location: classInfo.location, max: classInfo.max};
+    const initialEditClassFormValues = { name: classInfo.name, type: classInfo.type, time: classInfo.time, duration: classInfo.duration, intensity: classInfo.intensity, location: classInfo.location, max: classInfo.max };
 
     const [classFormValues, setClassFormValues] =
-    useState(initialEditClassFormValues);
-	const [classId, setClassId] = useState(classInfo?.class_id);
-    
+        useState(initialEditClassFormValues);
+    const [classId, setClassId] = useState(classInfo?.class_id);
 
 
 
-	const onChange = (e) => {
-		//pull out the name and value of the event target
-		const { name } = e.target;
 
-		const newClassFormValues = {
-			...classFormValues,
-			[name]: e.target.value,
-		};
-		setClassFormValues(newClassFormValues);
-	};
+    const onChange = (e) => {
+        //pull out the name and value of the event target
+        const { name } = e.target;
+
+        const newClassFormValues = {
+            ...classFormValues,
+            [name]: e.target.value,
+        };
+        setClassFormValues(newClassFormValues);
+    };
 
     const minutesFormat = (num) => {
         return num + 'minutes';
     }
 
     const editClassSubmitHandler = (e) => {
-		e.preventDefault();
-		// send to database via axios
-		axios.put(
-			`/class/${classId} `,
-			{
+        e.preventDefault();
+        // send to database via axios
+        axios.put(
+            `/class/${classId} `,
+            {
                 name: classInfo.name, type: classInfo.type, time: classInfo.time, duration: classInfo.duration, intensity: classInfo.intensity, location: classInfo.location, max: classInfo.max,
-			},
-		)
-			.then((res) => {
-				setClassFormValues(res.data);
-				setClassId(res.data.class_id);
-			})
-			.finally(() => {
-				console.log(classId);
+            },
+        )
+            .then((res) => {
+                setClassFormValues(res.data);
+                setClassId(res.data.class_id);
+            })
+            .finally(() => {
                 console.log(classId);
-                <Redirect to="/class" />
-			});
-	};
+                console.log(classId);
+                <Redirect to="/homeinstructor" />
+            });
+    };
 
-	if (!classInfo) {
-		return <div>Loading Class...</div>;
-	}
+    if (!classInfo) {
+        return <div>Loading Class...</div>;
+    }
 
     return (
         <div>
@@ -104,16 +104,16 @@ export default function EditClass() {
                     onChange={onChange}
                     value={classFormValues.type}
                 />
-            <label>
-                <input
-                    name="time"
-                    label="time"
-                    type="datetime-local"
-                    id="time"
-                    onChange={onChange}
-                    value={classFormValues.time}
-                />
-            </label>
+                <label>
+                    <input
+                        name="time"
+                        label="time"
+                        type="datetime-local"
+                        id="time"
+                        onChange={onChange}
+                        value={classFormValues.time}
+                    />
+                </label>
 
                 <input
                     placeholder="Duration (min)"
@@ -126,10 +126,10 @@ export default function EditClass() {
                     onChange={onChange}
                     value={classFormValues.duration}
                 />
-                    <input
+                <input
                     placeholder="Intensity (1-5)"
-                    min={ 1 } 
-                    max={ 5 }
+                    min={1}
+                    max={5}
                     name="intensity"
                     label="intensity"
                     type="number"

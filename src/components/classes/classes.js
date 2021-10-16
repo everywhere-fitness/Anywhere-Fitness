@@ -13,7 +13,6 @@ import "../../App.css"
 import Search from "./search"
 import Class from "./class";
 import { GlobalPropsContext } from "../GlobalPropsContext";
-import { Link } from "react-router-dom";
 
 
 export default function Classes() {
