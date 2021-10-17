@@ -78,7 +78,7 @@ const initialFakeClassData = [
 ]
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({ client: false, instructor: true });
   const [allClasses, setAllClasses] = useState(initialFakeClassData);
   const [isFetchingClasses, setIsFetchingClasses] = useState(false);
@@ -106,7 +106,6 @@ function App() {
   //     }
   //     getAllClasses();
   // })
-
 
 
 

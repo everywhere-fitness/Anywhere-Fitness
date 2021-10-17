@@ -1,13 +1,15 @@
 //1. User can create/register as a client and login with the registered credentials.
 // MARK
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Redirect, } from "react-router";
 import { useHistory } from "react-router";
 import { axiosWithAuth } from '../../utils/axiosWithAuth'
 import { GlobalPropsContext } from '../GlobalPropsContext'
 
+
 // Initial log in form values
 const initialLogInFormValues = { username: "", password: "" };
+
 
 export default function Login() {
     const [loginFormValues, setLogInFormValues] = useState(initialLogInFormValues);
@@ -21,6 +23,7 @@ export default function Login() {
             ...loginFormValues, [e.target.name]: e.target.value
         })
     }
+
 
     const loginSubmitHandler = (e) => {
         e.preventDefault();
