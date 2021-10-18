@@ -1,5 +1,9 @@
 //1. User can create/register as a client and login with the registered credentials.
 // MARK
+
+//2. User can create/register as an instructor 
+//by entering an additional Auth Code during signup, 
+//and can login with the registered credentials.
 import { useContext, useState, useEffect } from "react";
 import { Redirect, } from "react-router";
 import { useHistory } from "react-router";
