@@ -22,6 +22,7 @@ export default function NavBar() {
 
 
                     {/* Only clint sees link for view and selecting all classes */}
+                    {/* instructor sees it when not logged in */}
                     {(user.instructor === true && isLoggedIn === false) && <li><Link to="/classes">Classes</Link></li>}
                     {(user.client === true) && <li><Link to="/classes">Classes</Link></li>}
 
