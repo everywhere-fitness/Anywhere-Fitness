@@ -16,15 +16,14 @@ import { GlobalPropsContext } from "../GlobalPropsContext";
 
 
 export default function Classes() {
-    const { allClasses, isFetchingClasses } = useContext(GlobalPropsContext);
-
+    const { filteredClasses, isFetchingClasses } = useContext(GlobalPropsContext);
 
     return (
         <div>
             <Search />
             <div className="CardSection">
                 {isFetchingClasses ? "Loading Classes..." :
-                    allClasses.map((eachClass) => (
+                    filteredClasses.map((eachClass) => (
                         <Class class={eachClass} key={eachClass.id} />
                     ))}
             </div>
