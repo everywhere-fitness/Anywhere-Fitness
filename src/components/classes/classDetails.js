@@ -36,6 +36,14 @@ const ClassDetails = () => {
 
 export default ClassDetails;
 
+// IF CLIENT
+// also show join button if the user a client and they are not already joined 
+// show cancel button if they are joined to this class already
+
+// IF INSTRUCTOR
+// add edit and delete button if instructor is signed in
+
+
 {/* <div className="classDetails">
     <img src={img}></img>
     <h1>{name}</h1>

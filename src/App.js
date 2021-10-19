@@ -78,11 +78,11 @@ const initialFakeClassData = [
 ]
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [user, setUser] = useState({ client: true, instructor: false });
   const [allClasses, setAllClasses] = useState(initialFakeClassData);
   const [isFetchingClasses, setIsFetchingClasses] = useState(false);
-
+  const [filteredClasses, setFilteredClasses] = useState([]);
 
   //*******will be used once api is ready for getting classes******
   // const client = axios.create({
@@ -113,7 +113,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <GlobalPropsContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, allClasses, setAllClasses, isFetchingClasses, setIsFetchingClasses }}>
+        <GlobalPropsContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, allClasses, setAllClasses, isFetchingClasses, setIsFetchingClasses, setFilteredClasses, filteredClasses }}>
 
           <NavBar />
 
