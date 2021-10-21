@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/backend/data/seeds/02-seedFile.js"
+            "program": "/Users/charlie/Desktop/Lambda/full_stack/unit_4/anywhere-fitness-two/backend_two/index.js"
         }
     ]
 }
