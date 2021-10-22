@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("./user_model");
 
-const { checkUserId } = require("./user_middleware");
+const { checkUserId, validateUser } = require("./user_middleware");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -15,6 +15,22 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", checkUserId, (req, res, next) => {
   res.json(req.user);
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const newUser = await req.body;
+    if (newUser) {
+      User.createNew(newUser);
+      res.status(201).json(newUser);
+    } else {
+      res.status(400).json({ message: "Missing piece of info" });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: "There was an error while saving the new user",
+    });
+  }
 });
 
 module.exports = router;

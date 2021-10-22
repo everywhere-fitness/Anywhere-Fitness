@@ -19,9 +19,16 @@ function findBy(userName) {
   return db("users").where("username", userName).first();
 }
 
+function createNew(newUser) {
+  return db("users")
+    .insert(newUser)
+    .then((ids) => ({ id: ids[0] }));
+}
+
 module.exports = {
   getUsers,
   addUser,
   findById,
   findBy,
+  createNew,
 };
