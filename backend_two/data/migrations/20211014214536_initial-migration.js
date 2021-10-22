@@ -30,8 +30,8 @@ exports.up = async function (knex) {
         .notNullable()
         .references("user_type_id")
         .inTable("user_type")
-        .onDelete("CASCADE")
-        .onUpdate("CASCADE");
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT");
     })
     .createTable("user_type", (tbl) => {
       tbl.increments("user_type_id");

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("./user_model");
 
-const { checkUserId, validateUserId } = require("./user_middleware");
+const { validateUser, validateUserId } = require("./user_middleware");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -17,7 +17,7 @@ router.get("/:id", validateUserId, (req, res, next) => {
   res.json(req.user);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validateUser, async (req, res) => {
   try {
     const newUser = await req.body;
     if (newUser) {
