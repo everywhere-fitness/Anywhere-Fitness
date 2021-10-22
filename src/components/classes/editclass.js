@@ -10,29 +10,52 @@
 // - `Current number of registered attendees`
 // - `Max class size`
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect, } from "react-router";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import * as yup from 'yup'
+import { GlobalPropsContext } from '../GlobalPropsContext'
 import "../../App.css"
+import classFormSchema from "../../validation/classFormSchema.js";
+
+
+const initialFakeClassData =   {
+    name: "Jump Rope Zumba",
+    id: "1",
+    instructor: "Bob Jumper",
+    details: "Jump til your calve muscles explode",
+    img: "https://picsum.photos/200",
+    type: "aerobic",
+    time: "2022-01-01 15:30:00:00",
+    duration: 30,
+    intensity: 4,
+    location: "Mobile",
+    currentNumberOfParticipants: "17",
+    max: 30,
+}
+
+const initialCreateClassFormErrors = {name: "", type: "", time: "", duration: "", intensity: "", location: "", max: ""};
+
+const initialCreateButtonDisabled = true;
 
 
 export default function EditClass() {
+    const { isLoading, setIsLoading } = useContext(GlobalPropsContext);
 
-
-    const [classInfo, setClassInfo] = useState();
-    const params = useParams();
+    const [classInfo, setClassInfo] = useState(initialFakeClassData);
+    // const params = useParams();
     // use axios to get class info to display in form
-    useEffect(() => {
-        axios
-            .get(`/editClass/${params.id}`)
-            .then((res) => {
-                setClassInfo(res.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, [params]);
+    // useEffect(() => {
+    //     axios
+    //         .get(`/editClass/${params.id}`)
+    //         .then((res) => {
+    //             setClassInfo(res.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }, [params]);
 
     const initialEditClassFormValues = { name: classInfo.name, type: classInfo.type, time: classInfo.time, duration: classInfo.duration, intensity: classInfo.intensity, location: classInfo.location, max: classInfo.max };
 
@@ -40,12 +63,26 @@ export default function EditClass() {
         useState(initialEditClassFormValues);
     const [classId, setClassId] = useState(classInfo?.class_id);
 
-
-
+	const [createClassErrors, setCreateClassErrors] = useState(
+		initialCreateClassFormErrors,
+        );
+    const [createDisabled, setCreateDisabled] = useState(
+		initialCreateButtonDisabled,
+        );
 
     const onChange = (e) => {
-        //pull out the name and value of the event target
-        const { name } = e.target;
+        //VALIDATION
+        const { name, value } = e.target;
+		yup
+			.reach(classFormSchema, name)
+			.validate(value)
+			.then(() => {
+				setCreateClassErrors({ ...createClassErrors, [name]: "" });
+			})
+			.catch((err) => {
+				setCreateClassErrors({ ...createClassErrors, [name]: err.message });
+			});
+		console.log(createClassErrors);
 
         const newClassFormValues = {
             ...classFormValues,
@@ -54,12 +91,16 @@ export default function EditClass() {
         setClassFormValues(newClassFormValues);
     };
 
-    const minutesFormat = (num) => {
-        return num + 'minutes';
-    }
+	//ENABLE BUTTON WHEN NO ERRORS EXIST
+	useEffect(() => {
+		classFormSchema.isValid(classFormValues).then((isSchemaValid) => {
+			setCreateDisabled(!isSchemaValid);
+		});
+	}, [classFormValues]);
 
     const editClassSubmitHandler = (e) => {
         e.preventDefault();
+        setIsLoading(true);
         // send to database via axios
         axios.put(
             `/class/${classId} `,
@@ -73,7 +114,6 @@ export default function EditClass() {
             })
             .finally(() => {
                 console.log(classId);
-                console.log(classId);
                 <Redirect to="/homeinstructor" />
             });
     };
@@ -85,7 +125,7 @@ export default function EditClass() {
     return (
         <div>
             <form onSubmit={editClassSubmitHandler} className="form">
-                <h1>Create a Class!</h1>
+                <h1>Edit a Class!</h1>
                 <input
                     placeholder="Class Name"
                     name="name"
@@ -117,7 +157,6 @@ export default function EditClass() {
 
                 <input
                     placeholder="Duration (min)"
-                    format={minutesFormat}
                     step="5"
                     name="duration"
                     label="duration"
@@ -155,7 +194,10 @@ export default function EditClass() {
                     onChange={onChange}
                     value={classFormValues.max}
                 />
-                <button type="submit">
+                <button 
+                type="submit"
+                disabled={createDisabled}
+                >
                     Submit Edits
                 </button>
             </form>
