@@ -25,10 +25,15 @@ function createNew(newUser) {
     .then((ids) => ({ id: ids[0] }));
 }
 
+function remove(id) {
+  return db("users").where("user_id", id).del();
+}
+
 module.exports = {
   getUsers,
   addUser,
   findById,
   findBy,
   createNew,
+  remove,
 };

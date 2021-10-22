@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("./user_model");
 
-const { checkUserId, validateUser } = require("./user_middleware");
+const { checkUserId, validateUserId } = require("./user_middleware");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", checkUserId, (req, res, next) => {
+router.get("/:id", validateUserId, (req, res, next) => {
   res.json(req.user);
 });
 
@@ -30,6 +30,15 @@ router.post("/", async (req, res) => {
     res.status(500).json({
       message: "There was an error while saving the new user",
     });
+  }
+});
+
+router.delete("/:id", validateUserId, async (req, res, next) => {
+  try {
+    await User.remove(req.params.id);
+    res.json(req.user);
+  } catch (err) {
+    next(err);
   }
 });
 

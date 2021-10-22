@@ -1,6 +1,6 @@
 const User = require("../users/user_model");
 
-function checkUserId(req, res, next) {
+function validateUserId(req, res, next) {
   const id = req.params.id;
 
   User.findById(id).then((user) => {
@@ -13,22 +13,28 @@ function checkUserId(req, res, next) {
   });
 }
 
-function validateUser(req, res, next) {
-  const { username } = req.body;
-  if (!username || !username.trim()) {
-    res.status(400).json({ message: "missing required name field" });
-  } else {
-    req.name = name.trim();
-    next();
-  }
-}
+// function validateUser(req, res, next) {
+//   const { username, first_name, last_name, user_type } = req.body;
+//   if (
+//     !username ||
+//     !username.trim() ||
+//     !first_name ||
+//     !first_name.trim() ||
+//     !last_name ||
+//     !last_name.trim() ||
+//     !user_type
+//   ) {
+//     res.status(400).json({ message: "missing required name field" });
+//   } else {
+//     next();
+//   }
+// }
 
-async function checkUserNameUnique(req, res, next) {
-  const { name } = req.body;
-  const userName = await User.findBy(name);
-}
+// async function checkUserNameUnique(req, res, next) {
+//   const { name } = req.body;
+//   const userName = await User.findBy(name);
+// }
 
 module.exports = {
-  checkUserId,
-  validateUser,
+  validateUserId,
 };
