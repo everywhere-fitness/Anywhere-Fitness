@@ -6,6 +6,11 @@ async function getClasses() {
   return classRows;
 }
 
+async function getClassesById(id) {
+  return db('classes').where('class_id', id).first()
+}
+
 module.exports = {
   getClasses,
+  getClassesById
 };
