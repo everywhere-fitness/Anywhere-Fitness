@@ -22,6 +22,7 @@ exports.up = async function (knex) {
     .createTable("users", (tbl) => {
       tbl.increments("user_id");
       tbl.text("username", 256).unique().notNullable();
+      tbl.text("password", 256).notNullable();
       tbl.text("first_name", 256).notNullable();
       tbl.text("last_name", 256).notNullable();
       tbl

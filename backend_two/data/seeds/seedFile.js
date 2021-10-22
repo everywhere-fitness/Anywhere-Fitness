@@ -26,24 +26,28 @@ const classes = [
 const users = [
   {
     username: "globo_guy",
+    password: "abc123",
     first_name: "White",
     last_name: "Goodman",
     user_type: 1,
   },
   {
     username: "perfect_aerobics",
+    password: "abc123",
     first_name: "Jessie",
     last_name: "Wilson",
     user_type: 1,
   },
   {
     username: "rlngstne_reporter",
+    password: "abc123",
     first_name: "Adam",
     last_name: "Lawrence",
     user_type: 2,
   },
   {
     username: "dog_whisperer",
+    password: "abc123",
     first_name: "Ceasar",
     last_name: "Milan",
     user_type: 2,
