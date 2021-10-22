@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Class = require("./model");
 
-const { validateClassId } = require("./classes_middleware");
+const { validateClassId, validateClass } = require("./classes_middleware");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -13,8 +13,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", validateClassId, async (req, res, next) =>{
-  res.json(req.oldClass)
+router.get("/:id", validateClassId, async (req, res, next) => {
+  res.json(req.oldClass);
+});
+
+router.post("/", validateClass, async (req, res, next) => {
+  try{
+
+  }catch (err) {
+    
+  }
 });
 
 module.exports = router;
