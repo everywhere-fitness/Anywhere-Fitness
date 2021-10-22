@@ -72,8 +72,8 @@ export default function CreateClass() {
 
         Axios.post('./class', classFormValues)
             .then(res => {
-				setClassFormValues(res.data);
-				setClassId(res.data.class_id);
+                setClassFormValues(res.data);
+                setClassId(res.data.class_id);
                 console.log("class", res);
                 setIsLoading(false);
             })
@@ -81,7 +81,7 @@ export default function CreateClass() {
                 console.log(err);
                 <Redirect to="/class" />
             })
-        }
+    }
     return (
         <div>
             <form onSubmit={createClassSubmitHandler} className="form">
@@ -104,16 +104,16 @@ export default function CreateClass() {
                     onChange={onChange}
                     value={classFormValues.type}
                 />
-            <label>
-                <input
-                    name="time"
-                    label="time"
-                    type="datetime-local"
-                    id="time"
-                    onChange={onChange}
-                    value={classFormValues.time}
-                />
-            </label>
+                <label>
+                    <input
+                        name="time"
+                        label="time"
+                        type="datetime-local"
+                        id="time"
+                        onChange={onChange}
+                        value={classFormValues.time}
+                    />
+                </label>
 
                 <input
                     placeholder="Duration (min)"
@@ -125,10 +125,10 @@ export default function CreateClass() {
                     onChange={onChange}
                     value={classFormValues.duration}
                 />
-                    <input
+                <input
                     placeholder="Intensity (1-5)"
-                    min={ 1 } 
-                    max={ 5 }
+                    min={1}
+                    max={5}
                     name="intensity"
                     label="intensity"
                     type="number"
