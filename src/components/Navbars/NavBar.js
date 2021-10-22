@@ -1,46 +1,42 @@
-import { useContext } from "react";
+import { useState, useEffect } from "react";
 import "../../App.css"
-import { Link } from "react-router-dom";
-import { GlobalPropsContext } from "../GlobalPropsContext";
+import Hamburger from "./Hamburger";
+import NavBarContents from "./NavBarContents";
+
+function useWindowSize() {
+    const [width, setWidth] = useState([window.innerWidth]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth([window.innerWidth])
+        }
+        window.addEventListener("resize", handleResize);
+    }, [])
+
+    return width;
+
+}
 
 export default function NavBar() {
-    const { isLoggedIn } = useContext(GlobalPropsContext);
-    const { user } = useContext(GlobalPropsContext);
+    const [hamburgerState, setHamburgerState] = useState(false);
+    const [navState, setNavState] = useState(false)
+    const [width] = useWindowSize();
 
+    useEffect(() => {
+        if (width > 525) {
+            setNavState(true);
+        }
+        if (width < 525) {
+            setNavState(false);
+            setHamburgerState(false);
+        }
+    }, [width])
 
     return (
         <div className="navBar">
+            <Hamburger hamburgerState={hamburgerState} setHamburgerState={setHamburgerState} />
             <h1 className="titleOfApp">Anywhere Fitness</h1>
-            <nav>
-                <ul>
-
-                    {/* Home shown for client*/}
-                    {(user.client === true && isLoggedIn === true) && <li><Link to="/">Home</Link></li>}
-
-                    {/* Home shown for Instructor */}
-                    {(user.instructor === true && isLoggedIn === true) && <li> <Link to="/homeinstructor">Home</Link> </li>}
-
-
-                    {/* Only clint sees link for view and selecting all classes */}
-                    {/* instructor sees it when not logged in */}
-                    {(user.instructor === true && isLoggedIn === false) && <li><Link to="/classes">Classes</Link></li>}
-                    {(user.client === true) && <li><Link to="/classes">Classes</Link></li>}
-
-
-                    {/* Only instructor has createClass */}
-                    {(user.instructor === true && isLoggedIn === true) && <li><Link to="/createclass">Create a Class</Link></li>}
-
-
-                    {/* Have login for Instructor linked via client login form...or all in one page? */}
-                    {(isLoggedIn === false) && <li><Link to="/login">Login</Link></li>}
-
-                    {/* logout not shown when loggedin */}
-                    {(isLoggedIn === true) && <li><Link to="/logout">Logout </Link> </li>}
-
-                    {/* logout not shown when loggedin */}
-                    {(isLoggedIn === false) && <li><Link to="/signup">Signup</Link> </li>}
-                </ul>
-            </nav>
+            {(navState || hamburgerState) && < NavBarContents />}
         </div>
     )
 }
