@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../../App.css"
 import Hamburger from "./Hamburger";
 import NavBarContents from "./NavBarContents";
+import { GlobalPropsContext } from "../GlobalPropsContext";
 
+// custom hook for getting window size
 function useWindowSize() {
     const [width, setWidth] = useState([window.innerWidth]);
 
@@ -18,8 +20,8 @@ function useWindowSize() {
 }
 
 export default function NavBar() {
-    const [hamburgerState, setHamburgerState] = useState(false);
-    const [navState, setNavState] = useState(false)
+    const { hamburgerState, setHamburgerState } = useContext(GlobalPropsContext);
+    const { navState, setNavState } = useContext(GlobalPropsContext);
     const [width] = useWindowSize();
 
     useEffect(() => {

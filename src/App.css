@@ -19,7 +19,17 @@ body {
   color: #c76262;
   font-size: 3rem;
   text-shadow: 1.5px 1.5px 1.5px #2a2424;
+  /* display: inline; */
+  /* position: relative; */
 }
+
+/* .titleOfApp:after {
+  content: "Anywhere Fitness";
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  color: #4a403a7e;
+} */
 
 .navBar {
   background-color: #ffc069;

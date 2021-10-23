@@ -2,13 +2,33 @@ import react, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { GlobalPropsContext } from '../GlobalPropsContext';
+import { useHistory } from 'react-router';
 
 const ClassDetails = () => {
     //const [details, setDetails] = useState();
-    const { allClasses } = useContext(GlobalPropsContext);
+    const { allClasses, user } = useContext(GlobalPropsContext);
+    const [isJoined, setIsJoined] = useState(false);
+    const [isTeaching, setIsTeaching] = useState(true);
 
     const { id } = useParams();
+    const history = useHistory();
     console.log(id);
+
+
+    // CLIENT CAN JOIN BY CLICKING THIS
+    const handleJoin = () => {
+        setIsJoined(true);
+    }
+
+    // IF CLIENT HAS JOINED, CLICK THIS TO UNJOIN
+    const handleLeavingClass = () => {
+        setIsJoined(false);
+    }
+
+    const handleDelete = () => {
+
+    }
+
 
     //let id = allClasses.find(id => id === Number(classId));
 
@@ -29,7 +49,11 @@ const ClassDetails = () => {
 
     return (
         <div>
-            <h1>Shows Individual class for class with the id {id}</h1>
+            <h1>Shows Individual class details for class with the id of {id}</h1>
+            {(user.client && isJoined === false) && <button onClick={handleJoin} className='classButton'>Join Class</button>}
+            {(user.client && isJoined === true) && <button style={{ backgroundColor: "#4a403a" }} onClick={handleLeavingClass} className='classButton'>Leave Class</button>}
+            {(user.instructor && isTeaching === true) && <button onClick={() => { history.push('/editclass') }} className='classButton'>Edit Class</button>}
+            {(user.instructor && isTeaching === true) && <button style={{ backgroundColor: "#4a403a" }} onClick={handleDelete} className='classButton'>Delete Class</button>}
         </div>
     )
 }
