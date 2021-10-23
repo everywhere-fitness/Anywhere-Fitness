@@ -9,6 +9,7 @@ const classes = [
     registered_users: 1,
     max_class_size: 10,
     instructor_id: 1,
+    class_id: 1
   },
   {
     class_name: "Dime Aerobics",
@@ -20,6 +21,7 @@ const classes = [
     registered_users: 2,
     max_class_size: 10,
     instructor_id: 2,
+    class_id: 2
   },
 ];
 

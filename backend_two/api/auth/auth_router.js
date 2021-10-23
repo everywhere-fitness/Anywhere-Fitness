@@ -6,7 +6,7 @@ const {
     checkUsernameIsFree,
     checkUsernameExists,
     requirePassword
- } = require('./auth-middleware');
+ } = require('./auth_middleware');
 
 
 router.post("/register", requirePassword, checkUsernameIsFree, async (req, res, next) => {
@@ -21,6 +21,7 @@ router.post("/register", requirePassword, checkUsernameIsFree, async (req, res, 
     }
     catch(err){
         next(err)
+        console.log(err);
     }
 })
 

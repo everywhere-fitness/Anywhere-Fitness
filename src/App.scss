@@ -1,13 +1,13 @@
-/* $primary-yellow: #FFC069;
-$primary-black: #4A403A;
-$primary-red: #A45D5D;
-$primary-white: #EFEFEF; */
+$primary-yellow: #ffc069;
+$primary-black: #4a403a;
+$primary-red: #a45d5d;
+$primary-white: #efefef;
 
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 body {
-  background-color: #efefef;
-  color: #4a403a;
+  background-color: $primary-white;
+  color: $primary-black;
   font-family: "Fredoka One", cursive;
 }
 
@@ -19,20 +19,10 @@ body {
   color: #c76262;
   font-size: 3rem;
   text-shadow: 1.5px 1.5px 1.5px #2a2424;
-  /* display: inline; */
-  /* position: relative; */
 }
 
-/* .titleOfApp:after {
-  content: "Anywhere Fitness";
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  color: #4a403a7e;
-} */
-
 .navBar {
-  background-color: #ffc069;
+  background-color: $primary-yellow;
   margin: 0;
   margin-top: -25px;
   padding: 10px 0px;
@@ -43,7 +33,7 @@ body {
 }
 
 h1 {
-  color: #ffc069;
+  color: $primary-yellow;
   font-size: 2.3rem;
   text-shadow: 2px 2px 2px #0a0909;
 }
@@ -55,16 +45,18 @@ ul {
   justify-content: space-around;
 }
 
-li,
-a {
+@mixin li {
   text-decoration: none;
   list-style-type: none;
   color: #282c34;
 }
 
-a:hover {
-  color: #a45d5d;
-  text-shadow: 0.25px 0.25px 0.5px #554949;
+a {
+  @include li;
+  &:hover {
+    color: $primary-red;
+    text-shadow: 0.25px 0.25px 0.5px #554949;
+  }
 }
 
 .form {
@@ -77,61 +69,53 @@ a:hover {
   width: 400px;
   border: 1px solid black;
   padding: 20px 30px 70px 30px;
-  background-color: #4a403a;
+  background-color: $primary-black;
   border-radius: 5px;
   -webkit-box-shadow: 0px 1px 5px #3d2121;
   -moz-box-shadow: 0px 1px 5px #8a8181;
   box-shadow: 0px 1px 5px #8a8181;
 }
 
-.form input {
-  width: 400px;
-  height: 40px;
+.form {
   margin: 5px;
-  text-align: center;
   border-radius: 5px;
-  border: 0.5px solid rgb(34, 33, 33);
+  input {
+    width: 400px;
+    height: 40px;
+    text-align: center;
+    border: 0.5px solid rgb(34, 33, 33);
+  }
+  button {
+    width: 405px;
+    height: 45px;
+    font-size: 1.1rem;
+    background-color: $primary-yellow;
+  }
 }
 
-.form button {
-  width: 405px;
-  height: 45px;
-  margin: 5px;
-  font-size: 1.1rem;
-  background-color: #ffc069;
-  border-radius: 5px;
-}
-
-.classButton {
+@mixin classButton {
   width: 65%;
   height: 45px;
   margin: 5px;
   font-size: 1.2rem;
-  background-color: #a45d5d;
-  color: #efefef;
+  background-color: $primary-red;
+  color: $primary-white;
   border-radius: 5px;
 }
 
 .detailsButton {
-  width: 65%;
-  height: 45px;
-  margin: 5px;
-  font-size: 1.2rem;
-  color: #a45d5d;
-  background-color: #efefef;
-  border-radius: 5px;
+  @include classButton;
+  color: $primary-red;
+  background-color: $primary-white;
 }
 
-.signUpFinePrintUnderForm:hover {
-  color: #c76262e3;
-}
-
+.signUpFinePrintUnderForm:hover,
 .switchAccountFinePrint:hover {
   color: #c76262e3;
 }
 
 .switchAccountFinePrint:hover {
-  color: #ffc069;
+  color: $primary-yellow;
 }
 
 /* CLASSES DISPLAYED */
@@ -244,10 +228,5 @@ a:hover {
     text-align: center;
     color: #efefef;
     font-size: 2.1rem;
-  }
-  .titleOfApp {
-    font-size: 2.3rem;
-    margin-top: 30px;
-    margin-bottom: 20px;
   }
 }

@@ -19,6 +19,7 @@ export default function Login() {
     const [loginFormValues, setLogInFormValues] = useState(initialLogInFormValues);
     const { isLoading, setIsLoading } = useContext(GlobalPropsContext);
     const { user, setUser } = useContext(GlobalPropsContext);
+    const [loginError, setLoginError] = useState(false);
 
     let history = useHistory();
 
@@ -31,21 +32,27 @@ export default function Login() {
 
     const loginSubmitHandler = (e) => {
         e.preventDefault();
-        setIsLoading(true);
-        console.log(isLoading);
+        // setIsLoading(true);
+        // console.log(isLoading);
+
+        if (loginFormValues.username !== "lambda" && loginFormValues.password !== "school") {
+            setLoginError(true);
+        } else {
+            setLoginError(false);
+        }
 
         //if user === client
-        axiosWithAuth().post('/login', loginFormValues)
-            .then(res => {
-                localStorage.setItem('token', res.data.payload);
-                console.log("login", res);
-                setIsLoading(false);
-                history.push('/protected');
-            })
-            .catch(err => {
-                console.log(err);
-                <Redirect to="/login" />
-            })
+        // axiosWithAuth().post('/login', loginFormValues)
+        //     .then(res => {
+        //         localStorage.setItem('token', res.data.payload);
+        //         console.log("login", res);
+        //         setIsLoading(false);
+        //         history.push('/protected');
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //         <Redirect to="/login" />
+        //     })
         //if user === instructor
 
     }
@@ -77,6 +84,7 @@ export default function Login() {
                     LogIn
                 </button>
             </form>
+            {loginError && <p style={{ color: "red" }}>Username or Password does not match!</p>}
             <p onClick={() => { history.push('/signup') }}
                 className="signUpFinePrintUnderForm" >
                 <span style={user.client === true ? { display: 'inline' } : { display: 'none' }}> Brand New!  Sign Up for an account!</span>
