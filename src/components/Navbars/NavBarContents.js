@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { GlobalPropsContext } from "../GlobalPropsContext";
 
 export default function NavBarContents() {
-    const { isLoggedIn } = useContext(GlobalPropsContext);
+    const { isLoggedIn, setHamburgerState } = useContext(GlobalPropsContext);
     const { user } = useContext(GlobalPropsContext);
 
     return (
