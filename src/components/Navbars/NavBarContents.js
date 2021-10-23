@@ -2,10 +2,21 @@ import { useContext } from "react"
 import "../../App.css"
 import { Link } from "react-router-dom";
 import { GlobalPropsContext } from "../GlobalPropsContext";
+import { useHistory } from "react-router";
 
 export default function NavBarContents() {
-    const { isLoggedIn, setHamburgerState } = useContext(GlobalPropsContext);
+    const { isLoggedIn, setHamburgerState, setIsLoggedIn } = useContext(GlobalPropsContext);
     const { user } = useContext(GlobalPropsContext);
+
+
+    let history = useHistory();
+
+
+
+    function onLogoutClick() {
+        setIsLoggedIn(false);
+        history.push('/login');
+    };
 
     return (
         <div>
@@ -32,7 +43,7 @@ export default function NavBarContents() {
                     {(isLoggedIn === false) && <li><Link to="/login">Login</Link></li>}
 
                     {/* logout not shown when loggedin */}
-                    {(isLoggedIn === true) && <li><Link to="/logout">Logout </Link> </li>}
+                    {(isLoggedIn === true) && <li><Link onClick={onLogoutClick} to="/login">Logout </Link> </li>}
 
                     {/* logout not shown when loggedin */}
                     {(isLoggedIn === false) && <li><Link to="/signup">Signup</Link> </li>}

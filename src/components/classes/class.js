@@ -8,8 +8,8 @@ import { GlobalPropsContext } from "../GlobalPropsContext";
 
 
 export default function Class(props) {
-    const { allClasses, user } = useContext(GlobalPropsContext);
-    const [isJoined, setIsJoined] = useState(false);
+    const { allClasses, user, isLoggedIn, isJoined, setIsJoined } = useContext(GlobalPropsContext);
+
 
     const classId = props.class.id;
 
@@ -29,8 +29,8 @@ export default function Class(props) {
             <h2>{props.class.name}</h2>
             <img src={props.class.img} alt="coolImage" />
             <p>{props.class.date} {props.class.time}</p>
-            {(isJoined === false) && <button onClick={handleJoin} className='classButton'>Join Class</button>}
-            {(user.client && isJoined === true) && <button style={{ backgroundColor: "#4a403a" }} onClick={handleLeavingClass} className='classButton'>Leave Class</button>}
+            {(isLoggedIn && isJoined === false) && <button onClick={handleJoin} className='classButton'>Join Class</button>}
+            {(isLoggedIn && user.client && isJoined === true) && <button style={{ backgroundColor: "#4a403a" }} onClick={handleLeavingClass} className='classButton'>Leave Class</button>}
             <Link to={`/details/${classId}`}> <button className='detailsButton'>See Details</button> </Link>
         </div>
     )

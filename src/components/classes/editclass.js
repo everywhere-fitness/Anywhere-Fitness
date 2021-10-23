@@ -20,14 +20,14 @@ import "../../App.css"
 import classFormSchema from "../../validation/classFormSchema.js";
 
 
-const initialFakeClassData =   {
-    name: "Jump Rope Zumba",
+const initialFakeClassData = {
+    name: "Zumba",
     id: "1",
     instructor: "Bob Jumper",
     details: "Jump til your calve muscles explode",
     img: "https://picsum.photos/200",
     type: "aerobic",
-    time: "2022-01-01 15:30:00:00",
+    time: "2022-01-01T15:30:00",
     duration: 30,
     intensity: 4,
     location: "Mobile",
@@ -35,15 +35,17 @@ const initialFakeClassData =   {
     max: 30,
 }
 
-const initialCreateClassFormErrors = {name: "", type: "", time: "", duration: "", intensity: "", location: "", max: ""};
+const initialCreateClassFormErrors = { name: "", type: "", time: "", duration: "", intensity: "", location: "", max: "" };
 
 const initialCreateButtonDisabled = true;
 
 
 export default function EditClass() {
-    const { isLoading, setIsLoading } = useContext(GlobalPropsContext);
-
+    const { isLoading, setIsLoading, editID } = useContext(GlobalPropsContext);
     const [classInfo, setClassInfo] = useState(initialFakeClassData);
+
+    console.log(editID);
+
     // const params = useParams();
     // use axios to get class info to display in form
     // useEffect(() => {
@@ -63,26 +65,26 @@ export default function EditClass() {
         useState(initialEditClassFormValues);
     const [classId, setClassId] = useState(classInfo?.class_id);
 
-	const [createClassErrors, setCreateClassErrors] = useState(
-		initialCreateClassFormErrors,
-        );
+    const [createClassErrors, setCreateClassErrors] = useState(
+        initialCreateClassFormErrors,
+    );
     const [createDisabled, setCreateDisabled] = useState(
-		initialCreateButtonDisabled,
-        );
+        initialCreateButtonDisabled,
+    );
 
     const onChange = (e) => {
         //VALIDATION
         const { name, value } = e.target;
-		yup
-			.reach(classFormSchema, name)
-			.validate(value)
-			.then(() => {
-				setCreateClassErrors({ ...createClassErrors, [name]: "" });
-			})
-			.catch((err) => {
-				setCreateClassErrors({ ...createClassErrors, [name]: err.message });
-			});
-		console.log(createClassErrors);
+        yup
+            .reach(classFormSchema, name)
+            .validate(value)
+            .then(() => {
+                setCreateClassErrors({ ...createClassErrors, [name]: "" });
+            })
+            .catch((err) => {
+                setCreateClassErrors({ ...createClassErrors, [name]: err.message });
+            });
+        console.log(createClassErrors);
 
         const newClassFormValues = {
             ...classFormValues,
@@ -91,12 +93,12 @@ export default function EditClass() {
         setClassFormValues(newClassFormValues);
     };
 
-	//ENABLE BUTTON WHEN NO ERRORS EXIST
-	useEffect(() => {
-		classFormSchema.isValid(classFormValues).then((isSchemaValid) => {
-			setCreateDisabled(!isSchemaValid);
-		});
-	}, [classFormValues]);
+    //ENABLE BUTTON WHEN NO ERRORS EXIST
+    useEffect(() => {
+        classFormSchema.isValid(classFormValues).then((isSchemaValid) => {
+            setCreateDisabled(!isSchemaValid);
+        });
+    }, [classFormValues]);
 
     const editClassSubmitHandler = (e) => {
         e.preventDefault();
@@ -194,9 +196,9 @@ export default function EditClass() {
                     onChange={onChange}
                     value={classFormValues.max}
                 />
-                <button 
-                type="submit"
-                disabled={createDisabled}
+                <button
+                    type="submit"
+                    disabled={createDisabled}
                 >
                     Submit Edits
                 </button>

@@ -1,9 +1,10 @@
 // 7. Authenticated user can reschedule or cancel their current reservation from the mobile app.
 
-import react, { useState } from "react";
+import react, { useState, useContext, useEffect } from "react";
 import "../../App.css"
 import { Link } from "react-router-dom";
 import axios from "axios"
+import { GlobalPropsContext } from "../GlobalPropsContext";
 
 
 const fakeInitialUsersClasses = [
@@ -44,12 +45,32 @@ const fakeInitialUsersClasses = [
 export default function UsersClasses() {
     const [usersClasses, setUsersClasses] = useState(fakeInitialUsersClasses);
     const [isFetchingUsersClasses, setIsFetchingUsersClasses] = useState(false);
+    const { setIsJoined, isJoined, isLoggedIn, user } = useContext(GlobalPropsContext);
 
 
-    const cancelHavingJoinedClass = () => {
-
+    const handleLeavingClass = () => {
+        console.log("User has left the class");
+        setIsJoined(false);
     }
 
+    const handleJoin = () => {
+        console.log("User has joined class");
+        setIsJoined(true);
+    }
+
+    // practicing getting the user if I had an endpoint with a user id
+    let userId = "2";
+    useEffect(() => {
+        axios
+            .get(`https://reqres.in/api/users/${userId}`)
+            .then((res) => {
+                //setUser(res.data)
+                console.log('user', res.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [userId])
 
     return (
         <div>
@@ -61,8 +82,8 @@ export default function UsersClasses() {
                             <h2>{eachClass.name}</h2>
                             <img src={eachClass.img} alt="coolImage" />
                             <p>{eachClass.date} {eachClass.time}</p>
-                            <button onClick={cancelHavingJoinedClass} className='classButton'>Cancel Reservation</button>
-                            <Link to={`/details/${eachClass.id}`}> <button className='detailsButton'>See Details</button> </Link>
+                            {(isLoggedIn && isJoined === false) && <button onClick={handleJoin} className='classButton'>Join Class</button>}
+                            {(isLoggedIn && user.client && isJoined === true) && <button style={{ backgroundColor: "#4a403a" }} onClick={handleLeavingClass} className='classButton'>Leave Class</button>}                            <Link to={`/details/${eachClass.id}`}> <button className='detailsButton'>See Details</button> </Link>
                         </div>
 
                     ))}
