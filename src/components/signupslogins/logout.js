@@ -1,15 +1,25 @@
 // MARK
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GlobalPropsContext } from "../GlobalPropsContext";
-import { Redirect } from "react-router";
+import { Redirect, useHistory, useParams } from "react-router";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Logout = () => {
     const { setIsLoggedIn } = useContext(GlobalPropsContext);
     console.log('log out');
+    let history = useHistory();
+    let { params } = useParams();
+    console.log(params, "params from logout");
 
-    setIsLoggedIn(false);
-    <Redirect to="/login" />
+
+    useEffect(() => {
+        setIsLoggedIn(false);
+        history.push('/login');
+    });
+
+
+
+
     // axiosWithAuth().post('/logout')
     //     .then(res => {
     //         localStorage.removeItem('token')

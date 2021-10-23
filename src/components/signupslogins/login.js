@@ -42,17 +42,21 @@ export default function Login() {
         }
 
         //if user === client
-        // axiosWithAuth().post('/login', loginFormValues)
-        //     .then(res => {
-        //         localStorage.setItem('token', res.data.payload);
-        //         console.log("login", res);
-        //         setIsLoading(false);
-        //         history.push('/protected');
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //         <Redirect to="/login" />
-        //     })
+        // testing syntax with reqres
+        axiosWithAuth().post('https://reqres.in/api/login', {
+            "email": "eve.holt@reqres.in",
+            "password": "cityslicka"
+        })
+            .then(res => {
+                localStorage.setItem('token', res.data.payload);
+                console.log("login", res);
+                setIsLoading(false);
+                history.push('/home');
+            })
+            .catch(err => {
+                console.log(err);
+                <Redirect to="/login" />
+            })
         //if user === instructor
 
     }
